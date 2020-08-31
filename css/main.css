@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: black;
+  /* background-color: black; */
   color: black;
 }
 
@@ -726,6 +726,8 @@ input[type="number"]{
 
 .rong-stream-wrap .rong-is-zoom .rong-user-name {
   font-size: 18px;
+}
+.rong-stream-wrap .rong-is-zoom .rong-video {
 }
 
 .rong-stream-wrap .rong-video-close .rong-audio-cover, .rong-stream-wrap .rong-video-self-close .rong-audio-cover, .rong-stream-wrap .rong-video-other-close .rong-audio-cover {

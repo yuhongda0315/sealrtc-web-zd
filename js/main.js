@@ -330,6 +330,7 @@
     var isSelf = user.id === loginUserId;
     var streamBox = StreamBox.get(user.id);
     if (isSelf) {
+      return;
       var stream = user.stream;
       // var ms = stream.mediaStream;
       var tag = stream.tag;
@@ -528,7 +529,17 @@
   }
 
   function resizeStream(isZoom, id) {
-   
+    var StreamSize = rongRTC.StreamSize;
+    var size = isZoom ? StreamSize.MAX : StreamSize.MIN;
+    var user = userStreams.getStream(id);
+    if (!user) {
+      return;
+    }
+    user.stream.size = size;
+    rongRTCStream.resize(user).then(function () {
+    }, function (err) {
+      sealAlert(localeData.switchStreamError);
+    });
   }
 
   function showBoxScroll() {
@@ -553,7 +564,9 @@
       name: name
     });
     streamList.addBox(streamBox);
-    streamBox.zoom(user);
+    if(streamList.streamBoxList.length == 1){
+      streamBox.zoom(user);
+    }
     if (isSelf) {
       utils.Dom.addClass(streamBox.dom, 'rong-is-self');
       
@@ -564,10 +577,10 @@
       addUserStream(user);
     }
     var childDom = streamBox.childDom;
-    // childDom.videoBtn.onclick = function (e) {
-    //   streamBox.isVideoOpenedBySelf ? closeVideo(user) : openVideo(user);
-    //   e.stopPropagation();
-    // };
+    childDom.videoBtn.onclick = function (e) {
+      streamBox.isVideoOpenedBySelf ? closeVideo(user) : openVideo(user);
+      e.stopPropagation();
+    };
     childDom.audioBtn.onclick = function (e) {
       streamBox.isAudioOpenedBySelf ? closeAudio(user) : openAudio(user);
       e.stopPropagation();
@@ -598,7 +611,7 @@
         addUserBoxSetting(user);
       }
     } else {
-      addUserBoxSetting(user);
+      // addUserBoxSetting(user);
     }
   }
   function getCurrentUserName() {
@@ -799,13 +812,19 @@
     }
     var streamBoxList = streamList.streamBoxList;
     if (isRemoveBoxZoom) {
-      for (var key in streamBoxList) {
-        streamBox = streamBoxList[key];
-        if (streamBox.id === loginUserId) {
-          streamBox.zoom();
-        }
+      streamBox = streamBoxList[0];
+      if(streamBox){
+        streamBox.zoom(streamBox);
       }
     }
+    // if (isRemoveBoxZoom) {
+    //   for (var key in streamBoxList) {
+    //     streamBox = streamBoxList[key];
+    //     if (streamBox.id === loginUserId) {
+    //       streamBox.zoom();
+    //     }
+    //   }
+    // }
     //隐藏左右滑动视频窗按钮
     if (streamList.streamBoxList.length <= 10) {
       // Dom.hideByClass(ClassName.CASE_PRE_BTN);
@@ -831,11 +850,7 @@
     }
   }
   function publishSelfMediaStream(videoEnable, audioEnable, resolution, frameRate, audioOnly) {
-    console.info(videoEnable, frameRate)
-    console.time('get self media')
-    console.time('get ')
     return new Promise(function (resolve, reject) {
-      console.info(videoEnable, frameRate)
       if (!frameRate) {
         frameRate = 15;
       }
@@ -938,7 +953,6 @@
         roomsg.content.infoValue = userItem;
         roomsg.content.infoKey = userItem.userId;
         RongSeal.rongStorage.set(userItem.userId, JSON.stringify(userItem), roomsg).then(function () {
-          console.log('set store S')
           callback()
         }).catch(function (err) {
           console.log('set storage F:', err)
