@@ -376,7 +376,7 @@ input[type="number"]{
   
 }
 
-.rong-stream-top, .rong-user-title, .rong-user-timer,.rong-room-title{
+.rong-user-title, .rong-user-timer,.rong-room-title{
   display: none;
 }
 
@@ -562,9 +562,7 @@ input[type="number"]{
 }
 
 .rong-stream-wrap .rong-stream-box .rong-user-name {
-  /* display: none; */
   display: inline-block;
-  /* position: absolute; */
   right: 5px;
   top: 5px;
   margin: 0;
@@ -578,7 +576,7 @@ input[type="number"]{
   text-shadow: 0px 2px 4px #000;
   z-index: 20;
   line-height: 28px;
-  display: none;
+  display: inline-blocks;
 }
 
 .rong-stream-wrap .rong-stream-box .rong-rtc-cover {
@@ -728,6 +726,9 @@ input[type="number"]{
 }
 .rong-stream-wrap .rong-is-zoom .rong-video {
   background-color: transparent;
+}
+.rong-stream-wrap .rong-is-zoom .rong-user-name {
+  margin: 50px 50px 0 0;
 }
 
 .rong-stream-wrap .rong-video-close .rong-audio-cover, .rong-stream-wrap .rong-video-self-close .rong-audio-cover, .rong-stream-wrap .rong-video-other-close .rong-audio-cover {
