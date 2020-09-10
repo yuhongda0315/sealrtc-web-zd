@@ -417,7 +417,7 @@
   })();
   var getRTCOption = function () {
     return {
-      userId: '13269772769_06f2_web',
+      userId: 'webzhihuizhongxin',
       roomId: AppInfo.roomid,
       videoEnable: true,
       bystanderEnable: false,
@@ -563,7 +563,7 @@
     }
   };
 
-  startRTC('jsrHWhXFtbO4DbAVLDZLtpTEYEJQqMDVideXWWShdTCRCo9NHqXKHju+CHb2pnHV@emx6.cn.rongnav.com;emx6.cn.rongcfg.com')
+  startRTC('0Lgeka7kDMyk2StMaKrznhIJWGgKIOkKimFg6dOls9s/2NwH5FBhQA==@jc3j.cn.rongnav.com;jc3j.cn.rongcfg.com')
 
   var checkRoomTelValue = function () {
     // var roomId = roomDom.value;

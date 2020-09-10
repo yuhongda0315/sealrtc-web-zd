@@ -1,6 +1,6 @@
 (function (dependencies) {
   // 便于运维上线生产环境时修改，使 location.search.appkey 失效
-  const defaultAppkey = 'z3v5yqkbv8v30';
+  const defaultAppkey = 'e5t4ouvpebdia';
   const defaultRTCS = 'https://sealrtc.rongcloud.cn/v2';
   const defaultMS = ''
   /**
